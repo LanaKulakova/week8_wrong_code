@@ -1,24 +1,45 @@
-import logo from './logo.svg';
+import {useEffect, useState} from "react";
 import './App.css';
 
+
 function App() {
+
+const [myActivity, setMyActivity] = useState('');
+
+
+//useEffect (() => {
+//getActivity();
+//    }, [])
+
+//const getActivity = async () => {
+//  const response = await fetch(`http://www.boredapi.com/api/activity/`);
+//  const data = await response.json();
+ // console.log(data.activity);
+ // setMyActivity(data.activity)
+//}
+
+useEffect (() => {
+  const getActivity = async () => {
+    const response = await fetch(`http://www.boredapi.com/api/activity/`);
+    const data = await response.json();
+    console.log(data.activity);
+  }
+  getActivity()
+}, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<div className="App">
+
+<div className="container">
+<h2>{myActivity}</h2>
+</div>
+
+<div className="container">
+  <button className="btn" onClick={getActivity}> New Activity</button>
+</div>
+
+</div>
   );
 }
 
